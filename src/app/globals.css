@@ -1,0 +1,166 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #e3dff2;
+    --foreground: #000;
+    --border: #000;
+    --main: #a388ee;
+    --bg: #e3dff2;
+    --text: #000;
+    --accent: #a388ee;
+    --radius: 5px;
+  }
+ 
+  .dark {
+    --background: #272733;
+    --foreground: #eeefe9;
+    --border: #000;
+    --main: #a388ee;
+    --bg: #272733;
+    --text: #eeefe9;
+    --accent: #a388ee;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .border-border {
+    border-color: var(--border);
+  }
+}
+
+/* Neobrutalism Custom Styles */
+.shadow-brutal {
+  box-shadow: 4px 1px 0 0 var(--border);
+  transition: all 0.2s ease;
+}
+
+.shadow-brutal-lg {
+  box-shadow: 8px 2px 0 0 var(--border);
+  transition: all 0.2s ease;
+}
+
+.shadow-brutal-sm {
+  box-shadow: 2px 1px 0 0 var(--border);
+  transition: all 0.2s ease;
+}
+
+/* Animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.animate-delay-2 {
+  animation-delay: 0.2s;
+}
+
+.animate-delay-3 {
+  animation-delay: 0.3s;
+}
+
+.animate-delay-4 {
+  animation-delay: 0.4s;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  h1 {
+    @apply text-4xl font-heading;
+  }
+  h2 {
+    @apply text-2xl font-heading;
+  }
+  h3 {
+    @apply text-xl font-heading;
+  }
+}
+
+/* Mobile Navigation */
+.mobile-nav {
+  @apply fixed top-0 left-0 w-full h-screen bg-background z-50 transform transition-transform duration-300;
+}
+
+.mobile-nav.hidden {
+  transform: translateX(-100%);
+}
+
+/* Responsive Container */
+.container {
+  @apply px-4 mx-auto max-w-7xl;
+}
+
+/* Form Elements */
+input, textarea, select {
+  @apply border-4 border-border bg-background p-2 w-full focus:outline-none focus:ring-2 focus:ring-main;
+}
+
+button {
+  @apply border-4 border-border bg-main text-text font-bold p-2 shadow-brutal hover:shadow-brutal-lg transition-all;
+}
