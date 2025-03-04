@@ -8,8 +8,34 @@ import { Footer } from '@/components/footer'
 const dmSans = DM_Sans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Fast and Loud - Custom T-Shirt Indonesia',
-  description: 'Buat kaos custom kamu dengan desain yang unik dan kualitas terbaik di Fast and Loud',
+  title: 'Fast and Loud - Jasa Sablon & Produksi Kaos Custom Blitar',
+  description: 'Jasa pembuatan kaos custom terbaik di Blitar. Melayani sablon kaos, kaos kelas, garment, dan produksi kaos satuan hingga partai besar dengan kualitas premium. ⭐ Harga Bersaing',
+  keywords: 'sablon kaos blitar, kaos custom blitar, kaos kelas blitar, bikin kaos blitar, maklon kaos blitar, garment blitar, produksi kaos blitar, pabrik kaos blitar, sablon kaos, kaos custom, maklon kaos',
+  openGraph: {
+    title: 'Fast and Loud - Jasa Sablon & Produksi Kaos Custom Blitar',
+    description: 'Jasa pembuatan kaos custom terbaik di Blitar. Melayani sablon kaos, kaos kelas, garment, dan produksi kaos satuan hingga partai besar dengan kualitas premium.',
+    url: 'https://fastandloud.id',
+    siteName: 'Fast and Loud Custom T-Shirt Blitar',
+    locale: 'id_ID',
+    type: 'website',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: 'YOUR_GOOGLE_VERIFICATION_CODE', // Nanti bisa diisi dengan kode verifikasi Google Search Console
+  },
+  alternates: {
+    canonical: 'https://fastandloud.id',
+  },
 }
 
 export const viewport: Viewport = {
@@ -28,8 +54,8 @@ export default function RootLayout({
       <body className={`${dmSans.className} min-h-screen bg-background antialiased flex flex-col`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="light"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <Navbar />

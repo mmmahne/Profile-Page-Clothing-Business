@@ -34,10 +34,9 @@ const scaleIn = {
 }
 
 const heroImages = [
-  "https://images.unsplash.com/photo-1562157873-818bc0726f68?auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80",
+  'https://images.unsplash.com/photo-1562157873-818bc0726f68?auto=format&fit=crop&q=80', // Kaos polos
+  'https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&q=80', // Kaos dengan desain
+  'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&q=80', // Workshop
 ]
 
 const businessTypes = [
@@ -99,22 +98,27 @@ export default function HomePage() {
             className="inline-flex items-center gap-2 bg-main text-text px-4 py-2 rounded-base border-2 border-border mb-4 w-fit"
           >
             <Sparkles className="w-5 h-5" />
-            <span className="font-bold">Ekspresikan Gayamu!</span>
+            <span className="font-bold">Jasa Sablon Kaos Blitar</span>
           </motion.div>
 
           <motion.h1 
             variants={fadeInUp}
             className="text-4xl md:text-5xl lg:text-6xl font-heading mb-6"
           >
-            Buat Kaos Custom <br />
-            <span className="bg-main text-text px-2">Sesuai Keinginanmu</span>
+            Produksi Kaos Custom <br />
+            <span className="relative inline-block">
+              <span className="absolute -inset-1 bg-main transform rotate-2 rounded-base"></span>
+              <span className="relative inline-block px-4 py-2 bg-text text-background border-4 border-border rounded-base transform -rotate-2 hover:rotate-0 transition-transform">
+                Terbaik di Blitar
+              </span>
+            </span>
           </motion.h1>
 
           <motion.p 
             variants={fadeInUp}
             className="text-lg md:text-xl mb-8 max-w-lg"
           >
-            Wujudkan ide kreatifmu dalam bentuk kaos custom berkualitas dengan bahan premium dan printing terbaik
+            Spesialis produksi kaos custom & sablon kaos di Blitar dengan kualitas premium. Melayani pembuatan kaos satuan hingga partai besar untuk berbagai kebutuhan.
           </motion.p>
 
           <motion.div 
@@ -178,34 +182,72 @@ export default function HomePage() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-16"
+        className="py-16"
       >
-        {[
-          {
-            title: "Bahan Premium",
-            description: "Cotton combed 30s dengan jahitan rapi dan nyaman dipakai"
-          },
-          {
-            title: "Printing Berkualitas",
-            description: "Teknik DTF/DTG dengan hasil tajam dan tahan lama"
-          },
-          {
-            title: "Design Assistance",
-            description: "Konsultasi gratis dengan tim desainer profesional"
-          }
-        ].map((feature, index) => (
-          <motion.div
-            key={index}
-            variants={fadeInUp}
-            className="relative group"
-          >
-            <div className="absolute -inset-2 bg-main rounded-base transform transition-transform group-hover:translate-x-2 group-hover:translate-y-2"></div>
-            <div className="relative bg-background border-4 border-border p-6 rounded-base">
-              <h3 className="text-xl font-heading mb-2">{feature.title}</h3>
-              <p className="text-foreground/80">{feature.description}</p>
-            </div>
-          </motion.div>
-        ))}
+        <motion.h2 
+          variants={scaleIn}
+          className="text-2xl sm:text-3xl font-heading mb-12 inline-block bg-main text-text px-6 py-3 rounded-base border-4 border-border shadow-brutal"
+        >
+          Keunggulan Kami
+        </motion.h2>
+
+        <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[
+            {
+              icon: Shirt,
+              title: "Bahan Premium",
+              description: "Cotton combed 30s dan CVC berkualitas tinggi dengan jahitan rapi dan nyaman dipakai",
+              features: ["100% Cotton Combed 30s", "Jahitan Rantai", "Anti Susut", "Nyaman Dipakai"]
+            },
+            {
+              icon: Palette,
+              title: "Teknik Sablon Modern",
+              description: "Menggunakan teknik DTF/DTG dengan hasil tajam, awet, dan tahan lama",
+              features: ["Hasil Tajam & Detail", "Tahan Lama", "Anti Luntur", "Tekstur Halus"]
+            },
+            {
+              icon: Users,
+              title: "Konsultasi Desain",
+              description: "Gratis konsultasi dengan tim desainer profesional untuk hasil terbaik",
+              features: ["Tim Profesional", "Revisi Desain", "Support File AI/PSD", "Ide Kreatif"]
+            }
+          ].map((feature, index) => (
+            <motion.div
+              key={index}
+              variants={fadeInUp}
+              className="relative group"
+            >
+              <div className="absolute -inset-2 bg-main rounded-base transform-gpu transition-transform group-hover:translate-x-2 group-hover:translate-y-2"></div>
+              <div className="relative bg-background border-4 border-border p-6 rounded-base overflow-hidden">
+                {/* Decorative Background */}
+                <div className="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 bg-main/10 rounded-full transform rotate-45 group-hover:scale-110 transition-transform"></div>
+                
+                {/* Icon */}
+                <div className="relative z-10 mb-6">
+                  <div className="w-16 h-16 bg-main rounded-base border-4 border-border flex items-center justify-center shadow-brutal group-hover:shadow-none transition-all group-hover:translate-x-[4px] group-hover:translate-y-[1px]">
+                    <feature.icon className="w-8 h-8 text-text animate-pulse-slow" />
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="relative z-10">
+                  <h3 className="text-xl font-heading mb-3 group-hover:text-main transition-colors">{feature.title}</h3>
+                  <p className="text-foreground/80 mb-4">{feature.description}</p>
+                  
+                  {/* Feature List */}
+                  <ul className="space-y-2">
+                    {feature.features.map((item, i) => (
+                      <li key={i} className="flex items-center text-sm group/item">
+                        <CheckCircle2 className="w-4 h-4 text-main mr-2 flex-shrink-0 group-hover/item:scale-110 transition-transform" />
+                        <span className="group-hover/item:text-main transition-colors">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </motion.div>
 
       {/* Business Solutions */}
@@ -216,12 +258,12 @@ export default function HomePage() {
         variants={staggerContainer}
         className="py-16"
       >
-        <motion.div variants={fadeInUp} className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-heading mb-4">Solusi untuk Berbagai Kebutuhan</h2>
-          <p className="text-lg text-foreground/80 max-w-2xl mx-auto">
-            Apapun kebutuhanmu, kami siap membantu dengan solusi custom clothing terbaik
-          </p>
-        </motion.div>
+        <motion.h2 
+          variants={scaleIn}
+          className="text-2xl sm:text-3xl font-heading mb-12 inline-block bg-main text-text px-6 py-3 rounded-base border-4 border-border shadow-brutal"
+        >
+          Layanan Produksi Kaos Blitar
+        </motion.h2>
 
         <motion.div 
           variants={staggerContainer}
@@ -229,16 +271,22 @@ export default function HomePage() {
         >
           {[
             {
-              title: "Korporat",
-              description: "Seragam kantor, merchandise event, atau gift untuk klien"
+              icon: Users,
+              title: "Kaos Kelas & Organisasi",
+              description: "Spesialis kaos kelas, kaos angkatan, dan kaos organisasi dengan desain kekinian",
+              features: ["Design Kekinian", "Bahan Berkualitas", "Harga Grup", "Free Design"]
             },
             {
-              title: "Komunitas",
-              description: "Kaos komunitas, jersey team, atau merchandise gathering"
+              icon: Building2,
+              title: "Garment & Maklon",
+              description: "Layanan garment dan maklon kaos untuk brand clothing dan distro",
+              features: ["Produksi Massal", "Quality Control", "Label Custom", "Packaging Premium"]
             },
             {
-              title: "Personal",
-              description: "Kaos couple, family gathering, atau hadiah spesial"
+              icon: Boxes,
+              title: "Merchandise & Promosi",
+              description: "Produksi kaos untuk merchandise event dan keperluan promosi perusahaan",
+              features: ["Design Corporate", "Express Service", "Bulk Order", "Custom Packaging"]
             }
           ].map((solution, index) => (
             <motion.div
@@ -246,14 +294,38 @@ export default function HomePage() {
               variants={scaleIn}
               className="relative group"
             >
-              <div className="absolute -inset-2 bg-main rounded-base transform transition-transform group-hover:translate-x-2 group-hover:translate-y-2"></div>
-              <div className="relative bg-background border-4 border-border p-6 rounded-base">
-                <h3 className="text-xl font-heading mb-2">{solution.title}</h3>
-                <p className="text-foreground/80 mb-4">{solution.description}</p>
-                <Button variant="neutral" className="w-full group">
-                  Pelajari Lebih Lanjut
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
+              <div className="absolute -inset-2 bg-main rounded-base transform-gpu transition-transform group-hover:translate-x-2 group-hover:translate-y-2"></div>
+              <div className="relative bg-background border-4 border-border p-6 rounded-base overflow-hidden">
+                {/* Decorative Background */}
+                <div className="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 bg-main/10 rounded-full transform rotate-45 group-hover:scale-110 transition-transform"></div>
+                
+                {/* Icon */}
+                <div className="relative z-10 mb-6">
+                  <div className="w-16 h-16 bg-main rounded-base border-4 border-border flex items-center justify-center shadow-brutal group-hover:shadow-none transition-all group-hover:translate-x-[4px] group-hover:translate-y-[1px]">
+                    <solution.icon className="w-8 h-8 text-text animate-pulse-slow" />
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="relative z-10">
+                  <h3 className="text-xl font-heading mb-3 group-hover:text-main transition-colors">{solution.title}</h3>
+                  <p className="text-foreground/80 mb-4">{solution.description}</p>
+                  
+                  {/* Feature List */}
+                  <ul className="space-y-2 mb-6">
+                    {solution.features.map((item, i) => (
+                      <li key={i} className="flex items-center text-sm group/item">
+                        <CheckCircle2 className="w-4 h-4 text-main mr-2 flex-shrink-0 group-hover/item:scale-110 transition-transform" />
+                        <span className="group-hover/item:text-main transition-colors">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <Button variant="neutral" className="w-full group shadow-brutal hover:shadow-none hover:translate-x-[4px] hover:translate-y-[1px] transition-all">
+                    Pelajari Lebih Lanjut
+                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </div>
               </div>
             </motion.div>
           ))}
@@ -397,20 +469,69 @@ export default function HomePage() {
         <div className="relative">
           <div className="absolute -inset-2 bg-main rounded-base transform-gpu"></div>
           <div className="relative bg-background border-4 border-border p-6 sm:p-8 rounded-base text-center">
-            <h2 className="text-2xl sm:text-3xl font-heading mb-4">Siap Untuk Membuat Kaos Custom?</h2>
-            <p className="text-lg mb-6 sm:mb-8">Hubungi kami sekarang untuk konsultasi gratis!</p>
+            <h2 className="text-2xl sm:text-3xl font-heading mb-4">Butuh Jasa Produksi Kaos di Blitar?</h2>
+            <p className="text-lg mb-6 sm:mb-8">Hubungi kami sekarang untuk penawaran terbaik!</p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Button size="lg" className="group w-full sm:w-auto">
-                Mulai Desain
+                Pesan Sekarang
                 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
               <Button variant="neutral" size="lg" className="w-full sm:w-auto">
-                Hubungi Kami
+                Konsultasi Gratis
               </Button>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Schema.org Markup */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "Fast and Loud Custom T-Shirt Blitar",
+            "image": [
+              "URL_TO_YOUR_LOGO_OR_SHOP_IMAGE"
+            ],
+            "@id": "https://fastandloud.id",
+            "url": "https://fastandloud.id",
+            "telephone": "YOUR_PHONE_NUMBER",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Bacem, Ponggok",
+              "addressLocality": "Blitar",
+              "postalCode": "66153",
+              "addressRegion": "Jawa Timur",
+              "addressCountry": "ID"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": -8.0008212,
+              "longitude": 112.1164736
+            },
+            "openingHoursSpecification": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+              ],
+              "opens": "08:00",
+              "closes": "17:00"
+            },
+            "sameAs": [
+              "YOUR_FACEBOOK_URL",
+              "YOUR_INSTAGRAM_URL",
+              "YOUR_TWITTER_URL"
+            ]
+          })
+        }}
+      />
     </div>
   )
 }
