@@ -1,6 +1,10 @@
+'use client'
+
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Truck, Package, BadgeCheck, Sparkles, Shirt } from "lucide-react"
 import Image from "next/image"
+import { motion } from "framer-motion"
+import { fadeInUp, staggerContainer, scaleIn, bounceIn, defaultViewport } from "@/lib/animations"
 
 const products = [
   {
@@ -81,13 +85,20 @@ export default function ProductsPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Header with Animated Background */}
-      <div className="relative overflow-hidden rounded-base border-4 border-border bg-main/5 p-8 mb-12">
+      <motion.div 
+        initial="hidden"
+        whileInView="visible"
+        viewport={defaultViewport}
+        variants={staggerContainer}
+        className="relative overflow-hidden rounded-base border-4 border-border bg-main/5 p-8 mb-12"
+      >
         <div className="absolute inset-0">
           <div className="absolute inset-0 opacity-30">
             {[...Array(20)].map((_, i) => (
-              <div
+              <motion.div
                 key={i}
-                className="absolute animate-float"
+                variants={bounceIn}
+                className="absolute"
                 style={{
                   left: `${Math.random() * 100}%`,
                   top: `${Math.random() * 100}%`,
@@ -95,32 +106,47 @@ export default function ProductsPage() {
                 }}
               >
                 <Shirt className="w-8 h-8 text-main opacity-20" />
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
         
         <div className="relative text-center">
-          <div className="inline-flex items-center gap-2 bg-main text-text px-4 py-2 rounded-base border-2 border-border mb-4 animate-slide-up">
+          <motion.div 
+            variants={scaleIn}
+            className="inline-flex items-center gap-2 bg-main text-text px-4 py-2 rounded-base border-2 border-border mb-4"
+          >
             <Sparkles className="w-5 h-5 animate-pulse-slow" />
             <span className="font-bold">Produk Terbaik Kami</span>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-heading mb-4 animate-slide-up animate-delay-1">
+          </motion.div>
+          <motion.h1 
+            variants={fadeInUp}
+            className="text-4xl md:text-5xl font-heading mb-4"
+          >
             Katalog Produk
-          </h1>
-          <p className="text-lg md:text-xl max-w-2xl mx-auto animate-slide-up animate-delay-2">
+          </motion.h1>
+          <motion.p 
+            variants={fadeInUp}
+            className="text-lg md:text-xl max-w-2xl mx-auto"
+          >
             Pilihan lengkap produk custom berkualitas untuk berbagai kebutuhan
-          </p>
+          </motion.p>
         </div>
-      </div>
+      </motion.div>
 
       {/* Highlights Section */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+      <motion.div 
+        initial="hidden"
+        whileInView="visible"
+        viewport={defaultViewport}
+        variants={staggerContainer}
+        className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
+      >
         {highlights.map((highlight, index) => (
-          <div
+          <motion.div
             key={index}
-            className="relative group bg-background border-4 border-border rounded-base p-4 flex items-center gap-4 animate-slide-up"
-            style={{ animationDelay: `${(index + 3) * 0.1}s` }}
+            variants={fadeInUp}
+            className="relative group bg-background border-4 border-border rounded-base p-4 flex items-center gap-4"
           >
             <div className="relative">
               <div className="absolute inset-0 bg-main rounded-full opacity-20 group-hover:scale-110 transition-transform"></div>
@@ -130,17 +156,23 @@ export default function ProductsPage() {
               <h3 className="font-heading text-lg group-hover:text-main transition-colors">{highlight.title}</h3>
               <p className="text-sm text-foreground/70">{highlight.description}</p>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       {/* Products Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <motion.div 
+        initial="hidden"
+        whileInView="visible"
+        viewport={defaultViewport}
+        variants={staggerContainer}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+      >
         {products.map((product, index) => (
-          <div
+          <motion.div
             key={product.id}
-            className="group relative bg-background border-4 border-border rounded-base p-4 hover:-translate-y-1 transition-all duration-300 animate-fade-in"
-            style={{ animationDelay: `${(index + 6) * 0.1}s` }}
+            variants={scaleIn}
+            className="group relative bg-background border-4 border-border rounded-base p-4 hover:-translate-y-1 transition-all duration-300"
           >
             {/* Badge */}
             {product.badge && (
@@ -197,12 +229,18 @@ export default function ProductsPage() {
                 </span>
               </Button>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       {/* CTA Section */}
-      <div className="mt-16 relative animate-slide-up animate-delay-4">
+      <motion.div 
+        initial="hidden"
+        whileInView="visible"
+        viewport={defaultViewport}
+        variants={fadeInUp}
+        className="mt-16 relative"
+      >
         <div className="absolute -inset-2 bg-main rounded-base transform-gpu group-hover:scale-105 transition-transform"></div>
         <div className="relative bg-background border-4 border-border p-6 sm:p-8 rounded-base">
           <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -232,7 +270,7 @@ export default function ProductsPage() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 } 
