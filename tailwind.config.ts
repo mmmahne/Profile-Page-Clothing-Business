@@ -21,7 +21,7 @@ const config: Config = {
   		colors: {
   			main: '#a388ee',
   			overlay: 'rgba(0,0,0,0.8)',
-  			bg: '#e3dff2',
+  			bg: '#ffffff',
   			text: '#000',
   			border: '#000',
   			darkBg: '#272733',

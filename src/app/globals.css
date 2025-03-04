@@ -4,11 +4,11 @@
 
 @layer base {
   :root {
-    --background: #e3dff2;
+    --background: #ffffff;
     --foreground: #000;
     --border: #000;
     --main: #a388ee;
-    --bg: #e3dff2;
+    --bg: #ffffff;
     --text: #000;
     --accent: #a388ee;
     --radius: 5px;
