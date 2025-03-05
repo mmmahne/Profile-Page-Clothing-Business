@@ -6,6 +6,16 @@ import { motion } from "framer-motion"
 import { fadeInUp, staggerContainer, scaleIn, bounceIn, rotateIn, defaultViewport } from "@/lib/animations"
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
 import { useState } from "react"
+import { LucideIcon } from 'lucide-react'
+
+interface PaymentMethod {
+  icon: LucideIcon;
+  name: string;
+  banks?: string[];
+  types?: string[];
+  places?: string[];
+  description: string;
+}
 
 const orderSteps = [
   {
@@ -35,7 +45,7 @@ const orderSteps = [
   }
 ]
 
-const paymentMethods = [
+const paymentMethods: PaymentMethod[] = [
   {
     icon: CreditCard,
     name: "Transfer Bank",
@@ -97,16 +107,39 @@ export default function InformationPage() {
         <div className="text-center relative">
           <motion.h1 
             variants={rotateIn}
-            className="text-4xl md:text-5xl font-heading mb-8 border-4 border-border p-4 bg-main text-text shadow-brutal inline-block rotate-[-1deg] transform-gpu"
+            className="text-4xl md:text-5xl font-heading mb-8 border-4 border-border p-6 bg-main text-text shadow-brutal inline-block rotate-[-1deg] transform-gpu relative hover:rotate-0 transition-transform duration-300"
           >
-            Informasi Pemesanan
+            <div className="absolute -inset-2 bg-main/20 rounded-base transform rotate-3 animate-pulse-slow"></div>
+            <span className="relative">Informasi Pemesanan</span>
           </motion.h1>
           <motion.p 
             variants={fadeInUp}
-            className="text-lg md:text-xl max-w-2xl mx-auto"
+            className="text-lg md:text-xl max-w-2xl mx-auto leading-relaxed"
           >
-            Pelajari cara pemesanan dan informasi penting lainnya untuk mendapatkan kaos custom terbaik
+            Pelajari cara pemesanan dan informasi penting lainnya untuk mendapatkan kaos custom terbaik dengan kualitas premium
           </motion.p>
+        </div>
+      </motion.div>
+
+      {/* Marquee Section */}
+      <motion.div 
+        initial="hidden"
+        whileInView="visible"
+        viewport={defaultViewport}
+        variants={fadeInUp}
+        className="mb-8 overflow-hidden border-y-4 border-border bg-main/5 py-4"
+      >
+        <div className="flex gap-8 animate-marquee whitespace-nowrap">
+          <span className="text-lg font-heading">🎨 Design Keren, Kualitas Premium</span>
+          <span className="text-lg font-heading">🚚 Gratis Ongkir Area Jakarta</span>
+          <span className="text-lg font-heading">⭐ Garansi 100% Uang Kembali</span>
+          <span className="text-lg font-heading">🏃 Proses Cepat 3-5 Hari Kerja</span>
+          <span className="text-lg font-heading">💯 Hasil Sablon Berkualitas</span>
+          <span className="text-lg font-heading">🎨 Design Keren, Kualitas Premium</span>
+          <span className="text-lg font-heading">🚚 Gratis Ongkir Area Jakarta</span>
+          <span className="text-lg font-heading">⭐ Garansi 100% Uang Kembali</span>
+          <span className="text-lg font-heading">🏃 Proses Cepat 3-5 Hari Kerja</span>
+          <span className="text-lg font-heading">💯 Hasil Sablon Berkualitas</span>
         </div>
       </motion.div>
 
@@ -150,7 +183,7 @@ export default function InformationPage() {
         >
           <motion.h2 
             variants={scaleIn}
-            className="text-2xl sm:text-3xl font-heading mb-12 inline-block bg-main text-text px-6 py-3 rounded-base border-4 border-border shadow-brutal"
+            className="text-2xl sm:text-3xl font-heading mb-12 inline-block"
           >
             Cara Pemesanan
           </motion.h2>
@@ -264,14 +297,14 @@ export default function InformationPage() {
         >
           <motion.h2 
             variants={scaleIn}
-            className="text-2xl sm:text-3xl font-heading mb-12 inline-block bg-main text-text px-6 py-3 rounded-base border-4 border-border shadow-brutal"
+            className="text-2xl sm:text-3xl font-heading mb-12 inline-block"
           >
             Ketentuan Design
           </motion.h2>
 
           <motion.div 
             variants={staggerContainer}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-8"
           >
             {[
               { 
@@ -306,65 +339,38 @@ export default function InformationPage() {
               <motion.div 
                 key={index}
                 variants={scaleIn}
-                className="relative group"
+                className="relative bg-white/5 p-8 rounded-xl"
               >
-                <div className="absolute -inset-2 bg-main rounded-base transform-gpu transition-transform group-hover:translate-x-2 group-hover:translate-y-2"></div>
-                <div className="relative bg-background border-4 border-border p-6 rounded-base h-full">
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0">
-                      <div className="relative">
-                        <div className="absolute -inset-2 bg-main/20 rounded-full transform rotate-6 group-hover:rotate-12 transition-transform"></div>
-                        <div className="relative w-12 h-12 flex items-center justify-center bg-main/10 rounded-full border-2 border-border">
-                          <item.icon className="w-6 h-6 text-main animate-pulse-slow" />
-                        </div>
-                      </div>
+                <div className="flex items-start gap-6">
+                  <div className="flex-shrink-0">
+                    <div className="w-14 h-14 flex items-center justify-center bg-main/10 rounded-xl">
+                      <item.icon className="w-8 h-8 text-main" />
                     </div>
-                    <div className="flex-grow">
-                      <h3 className="font-heading text-lg mb-2 group-hover:text-main transition-colors">{item.title}</h3>
-                      <p className="text-sm text-foreground/80 mb-3">{item.desc}</p>
-                      <div className="space-y-4">
-                        <div className="flex flex-wrap gap-2">
-                          {item.tags.map((tag, idx) => (
-                            <span
-                              key={idx}
-                              className="text-xs px-2 py-1 bg-main/10 rounded-base border border-border"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                        <ul className="space-y-1">
-                          {item.details.map((detail, idx) => (
-                            <li key={idx} className="text-sm flex items-center gap-2">
-                              <CheckCircle2 className="w-4 h-4 text-main flex-shrink-0" />
-                              <span>{detail}</span>
-                            </li>
-                          ))}
-                        </ul>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-heading mb-3">{item.title}</h3>
+                    <p className="text-base mb-6 text-foreground/80">{item.desc}</p>
+                    <div className="space-y-6">
+                      <div className="flex flex-wrap gap-3">
+                        {item.tags.map((tag, i) => (
+                          <span key={i} className="text-sm px-4 py-2 bg-main/5 rounded-lg">
+                            {tag}
+                          </span>
+                        ))}
                       </div>
+                      <ul className="space-y-3">
+                        {item.details.map((detail, i) => (
+                          <li key={i} className="flex items-center gap-3 text-base">
+                            <CheckCircle2 className="w-5 h-5 text-main" />
+                            <span>{detail}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
                 </div>
               </motion.div>
             ))}
-          </motion.div>
-
-          <motion.div 
-            variants={fadeInUp}
-            className="mt-8 p-4 bg-main/10 rounded-base border-2 border-border"
-          >
-            <div className="flex items-start gap-3">
-              <ShieldCheck className="w-6 h-6 text-main flex-shrink-0 mt-1" />
-              <div>
-                <p className="font-bold mb-1">Catatan Penting:</p>
-                <ul className="text-sm space-y-1">
-                  <li>• Pastikan design sudah final sebelum disubmit</li>
-                  <li>• Revisi maksimal 2x setelah approval design</li>
-                  <li>• Sertakan color code untuk warna spesifik</li>
-                  <li>• File dalam format yang didukung untuk menghindari delay produksi</li>
-                </ul>
-              </div>
-            </div>
           </motion.div>
         </motion.div>
 
@@ -375,65 +381,52 @@ export default function InformationPage() {
           whileInView="visible"
           viewport={defaultViewport}
           variants={staggerContainer}
-          className="mb-16 scroll-mt-32"
+          className="scroll-mt-32 lg:col-span-2"
         >
           <motion.h2 
             variants={scaleIn}
-            className="text-2xl sm:text-3xl font-heading mb-12 inline-block bg-main text-text px-6 py-3 rounded-base border-4 border-border shadow-brutal"
+            className="text-2xl sm:text-3xl font-heading mb-12 inline-block"
           >
             Metode Pembayaran
           </motion.h2>
 
           <motion.div 
             variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+            className="grid grid-cols-1 lg:grid-cols-3 gap-8"
           >
-            {paymentMethods.map((method, index) => (
-              <motion.div 
-                key={index}
+            {paymentMethods.map((method) => (
+              <motion.div
+                key={method.name}
                 variants={fadeInUp}
-                className="relative group"
+                className="relative bg-white/5 p-8 rounded-xl h-full"
               >
-                <div className="absolute -inset-2 bg-main rounded-base transform-gpu transition-transform group-hover:translate-x-2 group-hover:translate-y-2"></div>
-                <div className="relative bg-background border-4 border-border p-6 rounded-base h-full">
-                  <div className="flex items-center mb-4">
-                    <div className="w-12 h-12 rounded-full bg-main/10 border-2 border-border flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <method.icon className="w-6 h-6 text-main" />
-                    </div>
-                    <h3 className="ml-4 text-xl font-heading group-hover:text-main transition-colors">{method.name}</h3>
+                <div className="flex items-center gap-5 mb-6">
+                  <div className="w-14 h-14 flex items-center justify-center bg-main/10 rounded-xl">
+                    <method.icon className="w-8 h-8 text-main" />
                   </div>
-                  
-                  <p className="text-sm text-foreground/80 mb-4">{method.description}</p>
-                  
-                  <div className="space-y-2">
-                    {method.banks && (
-                      <div className="flex flex-wrap gap-2">
-                        {method.banks.map((bank, idx) => (
-                          <span key={idx} className="text-sm px-3 py-1 bg-main/10 rounded-base border border-border">
-                            {bank}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                    {method.types && (
-                      <div className="flex flex-wrap gap-2">
-                        {method.types.map((type, idx) => (
-                          <span key={idx} className="text-sm px-3 py-1 bg-main/10 rounded-base border border-border">
-                            {type}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                    {method.places && (
-                      <div className="flex flex-wrap gap-2">
-                        {method.places.map((place, idx) => (
-                          <span key={idx} className="text-sm px-3 py-1 bg-main/10 rounded-base border border-border">
-                            {place}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                  <h3 className="text-xl font-heading">{method.name}</h3>
+                </div>
+                <p className="text-base mb-6 text-foreground/80">{method.description}</p>
+                <div className="flex flex-wrap gap-3">
+                  {method.banks ? (
+                    method.banks.map((bank) => (
+                      <span key={bank} className="text-sm px-4 py-2 bg-main/5 rounded-lg">
+                        {bank}
+                      </span>
+                    ))
+                  ) : method.types ? (
+                    method.types.map((type) => (
+                      <span key={type} className="text-sm px-4 py-2 bg-main/5 rounded-lg">
+                        {type}
+                      </span>
+                    ))
+                  ) : (
+                    method.places?.map((place) => (
+                      <span key={place} className="text-sm px-4 py-2 bg-main/5 rounded-lg">
+                        {place}
+                      </span>
+                    ))
+                  )}
                 </div>
               </motion.div>
             ))}
@@ -447,127 +440,148 @@ export default function InformationPage() {
           whileInView="visible"
           viewport={defaultViewport}
           variants={staggerContainer}
-          className="relative group scroll-mt-32"
+          className="scroll-mt-32 lg:col-span-2"
         >
-          <motion.div variants={fadeInUp} className="absolute -inset-2 bg-main rounded-base transform-gpu transition-transform group-hover:translate-x-2 group-hover:translate-y-2"></motion.div>
-          <div className="relative bg-background border-4 border-border p-6 rounded-base">
-            <h2 className="text-2xl font-heading mb-6 flex items-center">
-              <Truck className="w-8 h-8 text-main mr-3 animate-pulse-slow" />
-              Pengiriman
-            </h2>
-            <motion.div variants={staggerContainer} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <motion.div variants={fadeInUp} className="space-y-4">
-                <div className="flex items-center p-4 border-2 border-border rounded-base hover:-translate-y-1 hover:border-main hover:shadow-brutal transition-all group/shipping">
-                  <Clock className="w-6 h-6 text-main mr-3 group-hover/shipping:scale-110 transition-transform" />
-                  <div>
-                    <h3 className="font-heading text-lg group-hover/shipping:text-main transition-colors">Estimasi Pengiriman</h3>
-                    <ul className="mt-2 space-y-1 text-sm">
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-main/70" />
-                        <span>JABODETABEK: 1-2 hari</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-main/70" />
-                        <span>Jawa: 2-3 hari</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-main/70" />
-                        <span>Luar Jawa: 3-5 hari</span>
-                      </li>
-                    </ul>
-                  </div>
+          <motion.h2 
+            variants={scaleIn}
+            className="text-2xl sm:text-3xl font-heading mb-12 inline-block"
+          >
+            Pengiriman
+          </motion.h2>
+          <motion.div variants={staggerContainer} className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Estimasi Pengiriman */}
+            <div className="bg-white/5 p-8 rounded-xl">
+              <div className="flex items-center gap-5 mb-8">
+                <div className="w-14 h-14 flex items-center justify-center bg-main/10 rounded-xl">
+                  <Clock className="w-8 h-8 text-main" />
                 </div>
-
-                <div className="flex items-center p-4 border-2 border-border rounded-base hover:-translate-y-1 hover:border-main hover:shadow-brutal transition-all group/shipping">
-                  <PackageCheck className="w-6 h-6 text-main mr-3 group-hover/shipping:scale-110 transition-transform" />
-                  <div>
-                    <h3 className="font-heading text-lg group-hover/shipping:text-main transition-colors">Jaminan Pengiriman</h3>
-                    <ul className="mt-2 space-y-1 text-sm">
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-main/70" />
-                        <span>Packaging double wrapping</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-main/70" />
-                        <span>Asuransi pengiriman</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-main/70" />
-                        <span>Tracking real-time</span>
-                      </li>
-                    </ul>
-                  </div>
+                <h3 className="text-xl font-heading">Estimasi Pengiriman</h3>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div className="bg-main/5 p-6 rounded-lg text-center">
+                  <h4 className="font-heading text-base mb-3 text-main">JABODETABEK</h4>
+                  <p className="text-sm">1-2 hari kerja</p>
                 </div>
-
-                <div className="flex items-center p-4 border-2 border-border rounded-base hover:-translate-y-1 hover:border-main hover:shadow-brutal transition-all group/shipping">
-                  <Scale className="w-6 h-6 text-main mr-3 group-hover/shipping:scale-110 transition-transform" />
-                  <div>
-                    <h3 className="font-heading text-lg group-hover/shipping:text-main transition-colors">Biaya Pengiriman</h3>
-                    <ul className="mt-2 space-y-1 text-sm">
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-main/70" />
-                        <span>Dihitung per kg</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-main/70" />
-                        <span>Min. 1 kg pertama</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-main/70" />
-                        <span>Diskon untuk bulk order</span>
-                      </li>
-                    </ul>
-                  </div>
+                <div className="bg-main/5 p-6 rounded-lg text-center">
+                  <h4 className="font-heading text-base mb-3 text-main">Pulau Jawa</h4>
+                  <p className="text-sm">2-3 hari kerja</p>
                 </div>
-              </motion.div>
-
-              <motion.div variants={fadeInUp} className="space-y-4">
-                <div className="flex items-center p-4 border-2 border-border rounded-base hover:-translate-y-1 hover:border-main hover:shadow-brutal transition-all group/shipping">
-                  <Boxes className="w-6 h-6 text-main mr-3 group-hover/shipping:scale-110 transition-transform" />
-                  <div>
-                    <h3 className="font-heading text-lg group-hover/shipping:text-main transition-colors">Ekspedisi Partner</h3>
-                    <div className="mt-2 grid grid-cols-2 gap-2">
-                      <span className="text-sm px-3 py-1 bg-main/10 rounded-base border border-border">JNE Express</span>
-                      <span className="text-sm px-3 py-1 bg-main/10 rounded-base border border-border">J&T Express</span>
-                      <span className="text-sm px-3 py-1 bg-main/10 rounded-base border border-border">SiCepat</span>
-                      <span className="text-sm px-3 py-1 bg-main/10 rounded-base border border-border">AnterAja</span>
-                    </div>
-                  </div>
+                <div className="bg-main/5 p-6 rounded-lg text-center">
+                  <h4 className="font-heading text-base mb-3 text-main">Luar Jawa</h4>
+                  <p className="text-sm">3-5 hari kerja</p>
                 </div>
+              </div>
+            </div>
 
-                <div className="flex items-center p-4 border-2 border-border rounded-base hover:-translate-y-1 hover:border-main hover:shadow-brutal transition-all group/shipping">
-                  <MapPin className="w-6 h-6 text-main mr-3 group-hover/shipping:scale-110 transition-transform" />
-                  <div>
-                    <h3 className="font-heading text-lg group-hover/shipping:text-main transition-colors">Area Pengiriman</h3>
-                    <div className="mt-2 grid grid-cols-2 gap-2">
-                      <span className="text-sm px-3 py-1 bg-main/10 rounded-base border border-border">Seluruh Indonesia</span>
-                      <span className="text-sm px-3 py-1 bg-main/10 rounded-base border border-border">Luar Negeri</span>
-                      <span className="text-sm px-3 py-1 bg-main/10 rounded-base border border-border">Pickup</span>
-                      <span className="text-sm px-3 py-1 bg-main/10 rounded-base border border-border">COD Area</span>
-                    </div>
-                  </div>
+            {/* Jaminan Pengiriman */}
+            <div className="bg-white/5 p-8 rounded-xl">
+              <div className="flex items-center gap-5 mb-8">
+                <div className="w-14 h-14 flex items-center justify-center bg-main/10 rounded-xl">
+                  <PackageCheck className="w-8 h-8 text-main" />
                 </div>
+                <h3 className="text-xl font-heading">Jaminan Pengiriman</h3>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div className="bg-main/5 p-6 rounded-lg text-center">
+                  <h4 className="font-heading text-base mb-3 text-main">Packaging</h4>
+                  <p className="text-sm">Double wrapping aman</p>
+                </div>
+                <div className="bg-main/5 p-6 rounded-lg text-center">
+                  <h4 className="font-heading text-base mb-3 text-main">Asuransi</h4>
+                  <p className="text-sm">Jaminan keamanan</p>
+                </div>
+                <div className="bg-main/5 p-6 rounded-lg text-center">
+                  <h4 className="font-heading text-base mb-3 text-main">Tracking</h4>
+                  <p className="text-sm">Real-time update</p>
+                </div>
+              </div>
+            </div>
 
-                <motion.div 
-                  variants={fadeInUp}
-                  className="p-4 bg-main/10 text-text rounded-base border-2 border-border relative overflow-hidden group/promo"
-                >
-                  <div className="absolute inset-0 bg-main/20 transform -translate-x-full group-hover/promo:translate-x-0 transition-transform duration-300"></div>
-                  <div className="relative z-10">
-                    <h3 className="font-bold flex items-center gap-2 mb-2">
-                      <Truck className="w-5 h-5 text-main animate-pulse" />
-                      Promo Pengiriman
-                    </h3>
-                    <ul className="text-sm space-y-1">
-                      <li>• FREE ONGKIR untuk area Jakarta! 🚚</li>
-                      <li>• Diskon 10% untuk pengiriman Pulau Jawa</li>
-                      <li>• Cashback ongkir untuk order {'>'} 100pcs</li>
-                    </ul>
+            {/* Area Pengiriman */}
+            <div className="bg-white/5 p-8 rounded-xl">
+              <div className="flex items-center gap-5 mb-8">
+                <div className="w-14 h-14 flex items-center justify-center bg-main/10 rounded-xl">
+                  <MapPin className="w-8 h-8 text-main" />
+                </div>
+                <h3 className="text-xl font-heading">Area Pengiriman</h3>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-2 gap-6">
+                <div className="bg-main/5 p-6 rounded-lg text-center">
+                  <h4 className="font-heading text-base mb-3 text-main">Domestik</h4>
+                  <p className="text-sm">Seluruh Indonesia</p>
+                </div>
+                <div className="bg-main/5 p-6 rounded-lg text-center">
+                  <h4 className="font-heading text-base mb-3 text-main">Internasional</h4>
+                  <p className="text-sm">Luar Negeri</p>
+                </div>
+                <div className="bg-main/5 p-6 rounded-lg text-center">
+                  <h4 className="font-heading text-base mb-3 text-main">Pickup</h4>
+                  <p className="text-sm">Ambil Sendiri</p>
+                </div>
+                <div className="bg-main/5 p-6 rounded-lg text-center">
+                  <h4 className="font-heading text-base mb-3 text-main">COD</h4>
+                  <p className="text-sm">Area Tertentu</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Biaya Pengiriman */}
+            <div className="bg-white/5 p-8 rounded-xl">
+              <div className="flex items-center gap-5 mb-8">
+                <div className="w-14 h-14 flex items-center justify-center bg-main/10 rounded-xl">
+                  <Scale className="w-8 h-8 text-main" />
+                </div>
+                <h3 className="text-xl font-heading">Biaya Pengiriman</h3>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div className="bg-main/5 p-6 rounded-lg text-center">
+                  <h4 className="font-heading text-base mb-3 text-main">Kalkulasi</h4>
+                  <p className="text-sm">Dihitung per kg</p>
+                </div>
+                <div className="bg-main/5 p-6 rounded-lg text-center">
+                  <h4 className="font-heading text-base mb-3 text-main">Free</h4>
+                  <p className="text-sm">Area Jakarta</p>
+                </div>
+                <div className="bg-main/5 p-6 rounded-lg text-center">
+                  <h4 className="font-heading text-base mb-3 text-main">Diskon</h4>
+                  <p className="text-sm">Order banyak</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Promo Pengiriman */}
+            <div className="lg:col-span-2 bg-white/5 p-8 rounded-xl">
+              <div className="flex items-center gap-5 mb-8">
+                <div className="w-14 h-14 flex items-center justify-center bg-main/10 rounded-xl">
+                  <Truck className="w-8 h-8 text-main" />
+                </div>
+                <h3 className="text-xl font-heading">Promo Pengiriman</h3>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                <div className="bg-main/5 p-6 rounded-lg text-center">
+                  <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center bg-main/10 rounded-lg">
+                    <MapPin className="w-6 h-6 text-main" />
                   </div>
-                </motion.div>
-              </motion.div>
-            </motion.div>
-          </div>
+                  <h4 className="font-heading text-base mb-3 text-main">FREE ONGKIR</h4>
+                  <p className="text-sm">Untuk area Jakarta! 🚚</p>
+                </div>
+                <div className="bg-main/5 p-6 rounded-lg text-center">
+                  <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center bg-main/10 rounded-lg">
+                    <Scale className="w-6 h-6 text-main" />
+                  </div>
+                  <h4 className="font-heading text-base mb-3 text-main">DISKON 10%</h4>
+                  <p className="text-sm">Pengiriman Pulau Jawa</p>
+                </div>
+                <div className="bg-main/5 p-6 rounded-lg text-center">
+                  <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center bg-main/10 rounded-lg">
+                    <PackageCheck className="w-6 h-6 text-main" />
+                  </div>
+                  <h4 className="font-heading text-base mb-3 text-main">CASHBACK</h4>
+                  <p className="text-sm">Order {'>'} 100pcs</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
 
@@ -582,7 +596,7 @@ export default function InformationPage() {
       >
         <motion.h2 
           variants={scaleIn}
-          className="text-2xl sm:text-3xl font-heading mb-12 inline-block bg-main text-text px-6 py-3 rounded-base border-4 border-border shadow-brutal"
+          className="text-2xl sm:text-3xl font-heading mb-12 inline-block"
         >
           Pertanyaan Umum
         </motion.h2>
@@ -651,7 +665,7 @@ export default function InformationPage() {
         </motion.div>
       </motion.div>
 
-      {/* CTA Section dengan Enhanced Animation */}
+      {/* CTA Section */}
       <motion.div 
         initial="hidden"
         whileInView="visible"
@@ -659,9 +673,8 @@ export default function InformationPage() {
         variants={fadeInUp}
         className="mt-16 text-center"
       >
-        <div className="relative inline-block group">
-          <motion.div variants={scaleIn} className="absolute -inset-2 bg-main rounded-base transform-gpu transition-transform group-hover:scale-105"></motion.div>
-          <div className="relative bg-background border-4 border-border p-6 sm:p-8 rounded-base">
+        <div className="relative inline-block">
+          <div className="relative p-6 sm:p-8 rounded-base">
             <h2 className="text-2xl sm:text-3xl font-heading mb-4">
               Siap Untuk Membuat Pesanan?
             </h2>

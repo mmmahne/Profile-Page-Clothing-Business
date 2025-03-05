@@ -1,11 +1,25 @@
 import type { Metadata, Viewport } from 'next'
-import { DM_Sans } from 'next/font/google'
+import { Inter, Michroma, Montserrat } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 import Navbar from '@/components/navbar'
 import { Footer } from '@/components/footer'
 
-const dmSans = DM_Sans({ subsets: ['latin'] })
+const inter = Inter({ 
+  subsets: ['latin'],
+  variable: '--font-inter',
+})
+
+const montserrat = Montserrat({ 
+  subsets: ['latin'],
+  variable: '--font-montserrat',
+})
+
+const michroma = Michroma({ 
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-michroma',
+})
 
 export const metadata: Metadata = {
   title: 'Fast and Loud - Jasa Sablon & Produksi Kaos Custom Blitar',
@@ -51,7 +65,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" suppressHydrationWarning>
-      <body className={`${dmSans.className} min-h-screen bg-background antialiased flex flex-col`}>
+      <body className={`${inter.variable} ${montserrat.variable} ${michroma.variable} min-h-screen bg-background antialiased flex flex-col`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

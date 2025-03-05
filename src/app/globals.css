@@ -4,24 +4,35 @@
 
 @layer base {
   :root {
-    --background: #ffffff;
+    --background: #E0E7F1;
     --foreground: #000;
     --border: #000;
-    --main: #a388ee;
-    --bg: #ffffff;
+    --main: #6A42C2;
+    --bg: #E0E7F1;
     --text: #000;
-    --accent: #a388ee;
-    --radius: 5px;
+    --accent: #6A42C2;
+    --radius: 17px;
   }
+
+  /* Font Weight Utilities for Montserrat */
+  .font-montserrat-thin { font-weight: 100; }
+  .font-montserrat-extralight { font-weight: 200; }
+  .font-montserrat-light { font-weight: 300; }
+  .font-montserrat-regular { font-weight: 400; }
+  .font-montserrat-medium { font-weight: 500; }
+  .font-montserrat-semibold { font-weight: 600; }
+  .font-montserrat-bold { font-weight: 700; }
+  .font-montserrat-extrabold { font-weight: 800; }
+  .font-montserrat-black { font-weight: 900; }
  
   .dark {
-    --background: #272733;
+    --background: #2c312b;
     --foreground: #eeefe9;
     --border: #000;
-    --main: #a388ee;
-    --bg: #272733;
+    --main: #6A42C2;
+    --bg: #2c312b;
     --text: #eeefe9;
-    --accent: #a388ee;
+    --accent: #6A42C2;
   }
 
   * {
@@ -29,7 +40,26 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight;
+    -webkit-text-stroke: 0.7px;
+    text-shadow: 0 0 1px currentColor;
+    letter-spacing: 0.05em;
+  }
+
+  /* Label style */
+  .section-label {
+    @apply font-heading;
+    letter-spacing: 0.02em;
+    -webkit-text-stroke: 0.5px;
+  }
+
+  /* Base text style */
+  p, span, div {
+    @apply font-sans font-montserrat-regular;
   }
 }
 
@@ -39,32 +69,29 @@
   }
 }
 
-/* Neobrutalism Custom Styles */
+/* Modern Minimalist Styles */
 .shadow-brutal {
-  box-shadow: 4px 1px 0 0 var(--border);
   transition: all 0.2s ease;
 }
 
 .shadow-brutal-lg {
-  box-shadow: 8px 2px 0 0 var(--border);
   transition: all 0.2s ease;
 }
 
 .shadow-brutal-sm {
-  box-shadow: 2px 1px 0 0 var(--border);
   transition: all 0.2s ease;
 }
 
 /* Animations */
 @keyframes float {
   0% {
-    transform: translateY(0px) rotate(0deg);
+    transform: translateY(0px);
   }
   50% {
-    transform: translateY(-20px) rotate(5deg);
+    transform: translateY(-10px);
   }
   100% {
-    transform: translateY(0px) rotate(0deg);
+    transform: translateY(0px);
   }
 }
 
@@ -73,14 +100,14 @@
     transform: scale(1);
   }
   50% {
-    transform: scale(1.05);
+    transform: scale(1.02);
   }
 }
 
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -97,8 +124,26 @@
   }
 }
 
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
 .animate-float {
-  animation: float 6s ease-in-out infinite;
+  animation: float 4s ease-in-out infinite;
 }
 
 .animate-pulse-slow {
@@ -106,33 +151,25 @@
 }
 
 .animate-slide-up {
-  animation: slideUp 0.5s ease-out forwards;
+  animation: slideUp 0.3s ease-out forwards;
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.5s ease-out forwards;
+  animation: fadeIn 0.3s ease-out forwards;
 }
 
-.animate-delay-1 {
-  animation-delay: 0.1s;
+.animate-marquee {
+  animation: marquee 40s linear infinite;
 }
 
-.animate-delay-2 {
-  animation-delay: 0.2s;
-}
-
-.animate-delay-3 {
-  animation-delay: 0.3s;
-}
-
-.animate-delay-4 {
-  animation-delay: 0.4s;
+.animate-marquee-reverse {
+  animation: marquee-reverse 40s linear infinite;
 }
 
 /* Responsive Typography */
 @media (max-width: 768px) {
   h1 {
-    @apply text-4xl font-heading;
+    @apply text-3xl font-heading;
   }
   h2 {
     @apply text-2xl font-heading;
@@ -142,25 +179,11 @@
   }
 }
 
-/* Mobile Navigation */
-.mobile-nav {
-  @apply fixed top-0 left-0 w-full h-screen bg-background z-50 transform transition-transform duration-300;
-}
-
-.mobile-nav.hidden {
-  transform: translateX(-100%);
-}
-
-/* Responsive Container */
-.container {
-  @apply px-4 mx-auto max-w-7xl;
-}
-
 /* Form Elements */
 input, textarea, select {
-  @apply border-4 border-border bg-background p-2 w-full focus:outline-none focus:ring-2 focus:ring-main;
+  @apply border-2 border-border bg-background p-3 w-full rounded-base focus:outline-none focus:ring-2 focus:ring-main/50 transition-all;
 }
 
 button {
-  @apply border-4 border-border bg-main text-text font-bold p-2 shadow-brutal hover:shadow-brutal-lg transition-all;
+  @apply border-2 border-border bg-main text-text font-medium p-3 rounded-base transition-all hover:bg-main/90;
 }

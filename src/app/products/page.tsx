@@ -241,8 +241,7 @@ export default function ProductsPage() {
         variants={fadeInUp}
         className="mt-16 relative"
       >
-        <div className="absolute -inset-2 bg-main rounded-base transform-gpu group-hover:scale-105 transition-transform"></div>
-        <div className="relative bg-background border-4 border-border p-6 sm:p-8 rounded-base">
+        <div className="relative bg-background p-6 sm:p-8 rounded-base">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <h2 className="text-2xl sm:text-3xl font-heading mb-4">
@@ -258,7 +257,7 @@ export default function ProductsPage() {
             </div>
             <div className="relative aspect-[4/3] md:aspect-square">
               <div className="absolute -inset-2 bg-main/20 rounded-base transform rotate-3 animate-pulse-slow"></div>
-              <div className="relative border-4 border-border rounded-base overflow-hidden">
+              <div className="relative rounded-base overflow-hidden">
                 <Image
                   src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&q=80"
                   alt="Custom T-Shirt Design Consultation"

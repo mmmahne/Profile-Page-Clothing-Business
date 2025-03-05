@@ -4,34 +4,8 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, Shirt, Palette, Clock, Star, Users, Building2, BadgeCheck, Boxes, Sparkles, CheckCircle2, Truck } from "lucide-react"
 import Image from "next/image"
 import { motion } from "framer-motion"
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: { duration: 0.5 }
-  }
-}
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2
-    }
-  }
-}
-
-const scaleIn = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: { 
-    opacity: 1, 
-    scale: 1,
-    transition: { duration: 0.5 }
-  }
-}
+import { fadeInUp, staggerContainer, scaleIn, bounceIn, defaultViewport } from '@/lib/animations'
+import { Typewriter } from '@/components/ui/typewriter'
 
 const heroImages = [
   'https://images.unsplash.com/photo-1562157873-818bc0726f68?auto=format&fit=crop&q=80', // Kaos polos
@@ -98,18 +72,22 @@ export default function HomePage() {
             className="inline-flex items-center gap-2 bg-main text-text px-4 py-2 rounded-base border-2 border-border mb-4 w-fit"
           >
             <Sparkles className="w-5 h-5" />
-            <span className="font-bold">Jasa Sablon Kaos Blitar</span>
+            <span className="font-bold">
+              <Typewriter text="Jasa Sablon Kaos Blitar" delay={0.5} />
+            </span>
           </motion.div>
 
           <motion.h1 
             variants={fadeInUp}
             className="text-4xl md:text-5xl lg:text-6xl font-heading mb-6"
           >
-            Produksi Kaos Custom <br />
-            <span className="relative inline-block">
+            <span className="block mb-4">
+              <Typewriter text="Produksi Kaos Custom" delay={0.8} />
+            </span>
+            <span className="relative inline-block mt-2">
               <span className="absolute -inset-1 bg-main transform rotate-2 rounded-base"></span>
               <span className="relative inline-block px-4 py-2 bg-text text-background border-4 border-border rounded-base transform -rotate-2 hover:rotate-0 transition-transform">
-                Terbaik di Blitar
+                <Typewriter text="Terbaik di Blitar" delay={1.2} />
               </span>
             </span>
           </motion.h1>
@@ -118,7 +96,10 @@ export default function HomePage() {
             variants={fadeInUp}
             className="text-lg md:text-xl mb-8 max-w-lg"
           >
-            Spesialis produksi kaos custom & sablon kaos di Blitar dengan kualitas premium. Melayani pembuatan kaos satuan hingga partai besar untuk berbagai kebutuhan.
+            <Typewriter 
+              text="Spesialis produksi kaos custom & sablon kaos di Blitar dengan kualitas premium. Melayani pembuatan kaos satuan hingga partai besar untuk berbagai kebutuhan." 
+              delay={1.5} 
+            />
           </motion.p>
 
           <motion.div 
@@ -156,23 +137,48 @@ export default function HomePage() {
               </motion.div>
             ))}
           </motion.div>
+
+          {/* Marquee Section */}
+          <motion.div 
+            variants={fadeInUp} 
+            className="w-full overflow-hidden py-4 bg-main/10 border-y-4 border-border mt-12"
+          >
+            <div className="flex animate-marquee whitespace-nowrap">
+              {[...Array(2)].map((_, i) => (
+                <div key={i} className="flex items-center gap-8 mx-4">
+                  <span className="text-lg font-bold">🎨 Design Keren, Kualitas Premium</span>
+                  <span className="text-lg font-bold">🚚 Gratis Ongkir Area Blitar</span>
+                  <span className="text-lg font-bold">⭐ Rating 4.9 dari 500+ Client</span>
+                  <span className="text-lg font-bold">⚡ Proses Cepat 3-5 Hari</span>
+                  <span className="text-lg font-bold">🛡️ Garansi 100% Uang Kembali</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </motion.div>
 
         <motion.div 
           variants={scaleIn}
-          className="relative aspect-square lg:aspect-auto"
+          className="relative aspect-square lg:aspect-[4/3] lg:h-[600px] flex items-center justify-center p-4"
         >
-          <div className="absolute -inset-4 bg-main/20 rounded-base transform rotate-3"></div>
-          <div className="relative h-full border-4 border-border rounded-base overflow-hidden">
+          {/* Main Image Container */}
+          <div className="relative w-full h-full overflow-hidden rounded-base">
             <Image
               src={heroImages[Math.floor(Math.random() * heroImages.length)]}
               alt="Custom T-Shirt Showcase"
               fill
-              className="object-cover"
+              className="object-cover transition-transform duration-500 hover:scale-105"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              priority
             />
+            
+            {/* Overlay Gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity"></div>
           </div>
-          {/* Decorative dots */}
-          <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-dots opacity-50"></div>
+
+          {/* Decorative Elements */}
+          <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-main/10 rounded-full animate-pulse-slow"></div>
+          <div className="absolute -top-6 -left-6 w-16 h-16 bg-main/20 rounded-full animate-float"></div>
         </motion.div>
       </motion.div>
 
@@ -186,7 +192,7 @@ export default function HomePage() {
       >
         <motion.h2 
           variants={scaleIn}
-          className="text-2xl sm:text-3xl font-heading mb-12 inline-block bg-main text-text px-6 py-3 rounded-base border-4 border-border shadow-brutal"
+          className="text-2xl sm:text-3xl section-label mb-12 inline-block bg-main text-text px-6 py-3 rounded-base border-4 border-border shadow-brutal"
         >
           Keunggulan Kami
         </motion.h2>
@@ -260,7 +266,7 @@ export default function HomePage() {
       >
         <motion.h2 
           variants={scaleIn}
-          className="text-2xl sm:text-3xl font-heading mb-12 inline-block bg-main text-text px-6 py-3 rounded-base border-4 border-border shadow-brutal"
+          className="text-2xl sm:text-3xl section-label mb-12 inline-block bg-main text-text px-6 py-3 rounded-base border-4 border-border shadow-brutal"
         >
           Layanan Produksi Kaos Blitar
         </motion.h2>
@@ -342,7 +348,7 @@ export default function HomePage() {
       >
         <motion.h2 
           variants={scaleIn}
-          className="text-2xl sm:text-3xl font-heading mb-12 inline-block bg-main text-text px-6 py-3 rounded-base border-4 border-border shadow-brutal"
+          className="text-2xl sm:text-3xl section-label mb-12 inline-block bg-background text-text px-6 py-3 rounded-base"
         >
           Proses Pembuatan
         </motion.h2>
@@ -377,13 +383,7 @@ export default function HomePage() {
               whileHover={{ scale: 1.02 }}
               className="relative group"
             >
-              <motion.div 
-                initial={{ scale: 0.8, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                transition={{ delay: i * 0.2 }}
-                className="absolute -inset-2 bg-main rounded-base transition-transform group-hover:translate-x-2 group-hover:translate-y-2 transform-gpu"
-              ></motion.div>
-              <div className="relative bg-background border-4 border-border p-6 rounded-base overflow-hidden">
+              <div className="relative bg-background p-6 rounded-base overflow-hidden">
                 <motion.div 
                   initial={{ x: -20, opacity: 0 }}
                   whileInView={{ x: 0, opacity: 1 }}
@@ -430,45 +430,66 @@ export default function HomePage() {
         </motion.div>
       </motion.section>
 
-      {/* Testimonials Section */}
-      <section className="py-16">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-heading mb-4">Apa Kata Mereka?</h2>
-          <p className="text-lg text-foreground/80 max-w-2xl mx-auto">
-            Testimoni dari pelanggan yang telah mempercayakan pembuatan kaos custom mereka kepada kami
+      {/* Client Section dengan Marquee */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={defaultViewport}
+        variants={staggerContainer}
+        className="py-16"
+      >
+        <motion.div variants={fadeInUp} className="container mb-12">
+          <h2 className="text-2xl md:text-3xl font-heading text-center mb-2">
+            <Typewriter text="Client Kami" delay={0.5} />
+          </h2>
+          <p className="text-center text-foreground/70">
+            <Typewriter text="Dipercaya oleh berbagai brand dan organisasi" delay={1} />
           </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <div key={index} className="relative">
-              <div className="absolute -inset-2 bg-main rounded-base transform-gpu"></div>
-              <div className="relative bg-background border-4 border-border p-6 rounded-base">
-                <div className="flex items-center mb-4">
-                  <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-border">
+        </motion.div>
+
+        <div className="relative overflow-hidden">
+          {/* First Marquee - Left to Right */}
+          <div className="flex animate-marquee whitespace-nowrap">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="flex items-center gap-12 mx-8">
+                {[1, 2, 3, 4, 5].map((num, index) => (
+                  <div key={index} className="relative w-32 h-20 bg-background rounded-base p-4 transform hover:scale-105 transition-transform">
                     <Image
-                      src={testimonial.image}
-                      alt={testimonial.name}
+                      src={`https://images.unsplash.com/photo-${num === 1 ? '1599305445671-ac291c95aaa9' : '1603366615917-1fa6dad5c4fa'}`}
+                      alt={`Client Logo ${num}`}
                       fill
-                      className="object-cover"
+                      className="object-contain p-2"
                     />
                   </div>
-                  <div className="ml-4">
-                    <h3 className="font-heading text-lg">{testimonial.name}</h3>
-                    <p className="text-sm text-foreground/70">{testimonial.role}</p>
-                  </div>
-                </div>
-                <p className="text-sm italic">"{testimonial.content}"</p>
+                ))}
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          {/* Second Marquee - Right to Left */}
+          <div className="flex animate-marquee-reverse whitespace-nowrap mt-8">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="flex items-center gap-12 mx-8">
+                {[1, 2, 3, 4, 5].map((num, index) => (
+                  <div key={index} className="relative w-32 h-20 bg-background rounded-base p-4 transform hover:scale-105 transition-transform">
+                    <Image
+                      src={`https://images.unsplash.com/photo-${num === 1 ? '1603366615917-1fa6dad5c4fa' : '1599305445671-ac291c95aaa9'}`}
+                      alt={`Client Logo ${num + 5}`}
+                      fill
+                      className="object-contain p-2"
+                    />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* CTA Section */}
       <section className="py-16">
         <div className="relative">
-          <div className="absolute -inset-2 bg-main rounded-base transform-gpu"></div>
-          <div className="relative bg-background border-4 border-border p-6 sm:p-8 rounded-base text-center">
+          <div className="relative bg-background p-6 sm:p-8 rounded-base text-center">
             <h2 className="text-2xl sm:text-3xl font-heading mb-4">Butuh Jasa Produksi Kaos di Blitar?</h2>
             <p className="text-lg mb-6 sm:mb-8">Hubungi kami sekarang untuk penawaran terbaik!</p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
