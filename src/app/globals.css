@@ -185,5 +185,5 @@ input, textarea, select {
 }
 
 button {
-  @apply border-2 border-border bg-main text-text font-medium p-3 rounded-base transition-all hover:bg-main/90;
+  @apply border-2 border-border bg-main text-white font-medium p-3 rounded-base transition-all hover:bg-main/90;
 }

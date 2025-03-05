@@ -129,17 +129,29 @@ export default function InformationPage() {
         variants={fadeInUp}
         className="mb-8 overflow-hidden border-y-4 border-border bg-main/5 py-4"
       >
-        <div className="flex gap-8 animate-marquee whitespace-nowrap">
-          <span className="text-lg font-heading">🎨 Design Keren, Kualitas Premium</span>
-          <span className="text-lg font-heading">🚚 Gratis Ongkir Area Jakarta</span>
-          <span className="text-lg font-heading">⭐ Garansi 100% Uang Kembali</span>
-          <span className="text-lg font-heading">🏃 Proses Cepat 3-5 Hari Kerja</span>
-          <span className="text-lg font-heading">💯 Hasil Sablon Berkualitas</span>
-          <span className="text-lg font-heading">🎨 Design Keren, Kualitas Premium</span>
-          <span className="text-lg font-heading">🚚 Gratis Ongkir Area Jakarta</span>
-          <span className="text-lg font-heading">⭐ Garansi 100% Uang Kembali</span>
-          <span className="text-lg font-heading">🏃 Proses Cepat 3-5 Hari Kerja</span>
-          <span className="text-lg font-heading">💯 Hasil Sablon Berkualitas</span>
+        <div className="relative flex overflow-x-hidden">
+          <div className="flex gap-8 animate-marquee-fast whitespace-nowrap">
+            <span className="text-lg font-heading">🎨 Design Keren, Kualitas Premium</span>
+            <span className="text-lg font-heading">🚚 Gratis Ongkir Area Jakarta</span>
+            <span className="text-lg font-heading">⭐ Garansi 100% Uang Kembali</span>
+            <span className="text-lg font-heading">🏃 Proses Cepat 3-5 Hari Kerja</span>
+            <span className="text-lg font-heading">💯 Hasil Sablon Berkualitas</span>
+            <span className="text-lg font-heading">🎨 Design Keren, Kualitas Premium</span>
+            <span className="text-lg font-heading">🚚 Gratis Ongkir Area Jakarta</span>
+            <span className="text-lg font-heading">⭐ Garansi 100% Uang Kembali</span>
+            <span className="text-lg font-heading">🏃 Proses Cepat 3-5 Hari Kerja</span>
+            <span className="text-lg font-heading">💯 Hasil Sablon Berkualitas</span>
+            <span className="text-lg font-heading">🎨 Design Keren, Kualitas Premium</span>
+            <span className="text-lg font-heading">🚚 Gratis Ongkir Area Jakarta</span>
+            <span className="text-lg font-heading">⭐ Garansi 100% Uang Kembali</span>
+            <span className="text-lg font-heading">🏃 Proses Cepat 3-5 Hari Kerja</span>
+            <span className="text-lg font-heading">💯 Hasil Sablon Berkualitas</span>
+            <span className="text-lg font-heading">🎨 Design Keren, Kualitas Premium</span>
+            <span className="text-lg font-heading">🚚 Gratis Ongkir Area Jakarta</span>
+            <span className="text-lg font-heading">⭐ Garansi 100% Uang Kembali</span>
+            <span className="text-lg font-heading">🏃 Proses Cepat 3-5 Hari Kerja</span>
+            <span className="text-lg font-heading">💯 Hasil Sablon Berkualitas</span>
+          </div>
         </div>
       </motion.div>
 
