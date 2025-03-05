@@ -368,57 +368,76 @@ export default function InformationPage() {
           </motion.div>
         </motion.div>
 
-        {/* Metode Pembayaran dengan Card Hover */}
-        <motion.div
+        {/* Metode Pembayaran dengan Grid Layout */}
+        <motion.div 
           id="metode-pembayaran"
           initial="hidden"
           whileInView="visible"
           viewport={defaultViewport}
           variants={staggerContainer}
-          className="relative group scroll-mt-32"
+          className="mb-16 scroll-mt-32"
         >
-          <motion.div variants={fadeInUp} className="absolute -inset-2 bg-main rounded-base transform-gpu transition-transform group-hover:translate-x-2 group-hover:translate-y-2"></motion.div>
-          <div className="relative bg-background border-4 border-border p-6 rounded-base">
-            <h2 className="text-2xl font-heading mb-6 flex items-center">
-              <PaymentIcon className="w-8 h-8 text-main mr-3 animate-pulse-slow" />
-              Metode Pembayaran
-            </h2>
-            <motion.div 
-              variants={staggerContainer}
-              className="grid grid-cols-1 md:grid-cols-3 gap-8"
-            >
-              {paymentMethods.map((method) => (
-                <motion.div
-                  key={method.name}
-                  variants={fadeInUp}
-                  className="relative group"
-                >
-                  <div className="absolute -inset-2 bg-main rounded-base transform-gpu transition-transform group-hover:translate-x-2 group-hover:translate-y-2"></div>
-                  <div className="relative bg-background border-4 border-border p-6 rounded-base h-full">
-                    <div className="flex flex-col items-center text-center">
-                      <div className="mb-4 p-3 bg-main/10 rounded-full border-2 border-border">
-                        <method.icon className="w-8 h-8 text-main animate-pulse-slow" />
-                      </div>
-                      <h3 className="font-heading text-lg mb-3 group-hover:text-main transition-colors">
-                        {method.name}
-                      </h3>
-                      <p className="text-sm text-foreground/70 mb-4">{method.description}</p>
-                      <div className="flex flex-wrap justify-center gap-2">
-                        {(method.banks || method.types || method.places)?.map((item) => (
-                          <span
-                            key={item}
-                            className="text-xs px-3 py-1 bg-main/10 rounded-base border border-border"
-                          >
-                            {item}
+          <motion.h2 
+            variants={scaleIn}
+            className="text-2xl sm:text-3xl font-heading mb-12 inline-block bg-main text-text px-6 py-3 rounded-base border-4 border-border shadow-brutal"
+          >
+            Metode Pembayaran
+          </motion.h2>
+
+          <motion.div 
+            variants={staggerContainer}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          >
+            {paymentMethods.map((method, index) => (
+              <motion.div 
+                key={index}
+                variants={fadeInUp}
+                className="relative group"
+              >
+                <div className="absolute -inset-2 bg-main rounded-base transform-gpu transition-transform group-hover:translate-x-2 group-hover:translate-y-2"></div>
+                <div className="relative bg-background border-4 border-border p-6 rounded-base h-full">
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 rounded-full bg-main/10 border-2 border-border flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <method.icon className="w-6 h-6 text-main" />
+                    </div>
+                    <h3 className="ml-4 text-xl font-heading group-hover:text-main transition-colors">{method.name}</h3>
+                  </div>
+                  
+                  <p className="text-sm text-foreground/80 mb-4">{method.description}</p>
+                  
+                  <div className="space-y-2">
+                    {method.banks && (
+                      <div className="flex flex-wrap gap-2">
+                        {method.banks.map((bank, idx) => (
+                          <span key={idx} className="text-sm px-3 py-1 bg-main/10 rounded-base border border-border">
+                            {bank}
                           </span>
                         ))}
                       </div>
-                    </div>
+                    )}
+                    {method.types && (
+                      <div className="flex flex-wrap gap-2">
+                        {method.types.map((type, idx) => (
+                          <span key={idx} className="text-sm px-3 py-1 bg-main/10 rounded-base border border-border">
+                            {type}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                    {method.places && (
+                      <div className="flex flex-wrap gap-2">
+                        {method.places.map((place, idx) => (
+                          <span key={idx} className="text-sm px-3 py-1 bg-main/10 rounded-base border border-border">
+                            {place}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </motion.div>
 
         {/* Pengiriman dengan Interactive Elements */}
